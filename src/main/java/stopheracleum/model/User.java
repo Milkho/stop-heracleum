@@ -1,9 +1,12 @@
 package stopheracleum.model;
 
-import java.util.Set;
+import java.io.Serializable;
+import java.util.*;
 
 import javax.persistence.*;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.beans.support.MutableSortDefinition;
+import org.springframework.beans.support.PropertyComparator;
 
 
 /**
@@ -11,47 +14,42 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 @Entity
 @Table(name = "user")
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "first_name")
+    @Column(name = "sso_id", nullable=false)
+    @NotEmpty
+    private String ssoID;
+
+    @Column(name = "first_name", nullable=false)
     @NotEmpty
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable=false)
     @NotEmpty
     private String lastName;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable=false)
     @NotEmpty
     private String email;
 
-    @Column(name = "username")
+    @Column(name = "username", unique=true, nullable=false)
     @NotEmpty
     private String username;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable=false)
     @NotEmpty
     private String password;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @ManyToOne
+    @JoinColumn (name = "role_id")
+    private Role role;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
     private Set<Point> points;
-
-    public User(){
-
-    }
-
-    public User(Integer id, String firstName, String lastName, String email, String username, String password) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.username = username;
-        this.password = password;
-    }
 
     public Integer getId() {
         return id;
@@ -61,13 +59,20 @@ public class User {
         this.id = id;
     }
 
+    public String getSsoID() {
+        return ssoID;
+    }
+
+    public void setSsoID(String ssoID) {
+        this.ssoID = ssoID;
+    }
+
     public String getFirstName() {
         return firstName;
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName
-        ;
+        this.firstName = firstName;
     }
 
     public String getLastName() {
@@ -101,6 +106,24 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    private Set<Point> getPointsInternal() {
+        if (this.points == null) {
+            this.points = new HashSet<Point>();
+        }
+        return this.points;
+    }
+
+    public List<Point> getPoints() {
+        List<Point> sortedPoints = new ArrayList<Point>(getPointsInternal());
+        PropertyComparator.sort(sortedPoints, new MutableSortDefinition("id", false, false));
+        return Collections.unmodifiableList(sortedPoints);
+    }
+
+    public void addPoint(Point point) {
+        getPointsInternal().add(point);
+        point.setUser(this);
     }
 
     @Override
