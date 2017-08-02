@@ -1,5 +1,6 @@
 package stopheracleum.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -9,7 +10,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 @Entity
 @Table(name = "point")
-public class Point {
+public class Point implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

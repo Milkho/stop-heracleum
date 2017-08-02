@@ -1,9 +1,12 @@
 package stopheracleum.model;
 
-import java.util.Set;
+import java.io.Serializable;
+import java.util.*;
 
 import javax.persistence.*;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.beans.support.MutableSortDefinition;
+import org.springframework.beans.support.PropertyComparator;
 
 
 /**
@@ -11,7 +14,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 @Entity
 @Table(name = "user")
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -66,8 +69,7 @@ public class User {
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName
-        ;
+        this.firstName = firstName;
     }
 
     public String getLastName() {
@@ -101,6 +103,24 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    private Set<Point> getVisitsInternal() {
+        if (this.points == null) {
+            this.points = new HashSet<Point>();
+        }
+        return this.points;
+    }
+
+    public List<Point> getVisits() {
+        List<Point> sortedPoints = new ArrayList<Point>(getVisitsInternal());
+        PropertyComparator.sort(sortedPoints, new MutableSortDefinition("id", false, false));
+        return Collections.unmodifiableList(sortedPoints);
+    }
+
+    public void addPoint(Point point) {
+        getVisitsInternal().add(point);
+        point.setUser(this);
     }
 
     @Override
