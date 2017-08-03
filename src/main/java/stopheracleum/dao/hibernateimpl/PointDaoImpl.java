@@ -15,35 +15,32 @@ public class PointDaoImpl implements PointDao {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public void addPoint(Point point) {
-        sessionFactory.getCurrentSession().save(point);
+
+    @Override
+    public void save(Point point) {
+        //TODO
     }
 
-    public void updatePoint(Point point) {
-        Point pointToUpdate = getPoint(point.getId());
-
-        pointToUpdate.setLatitude(point.getLatitude());
-        pointToUpdate.setLongtitude(point.getLongtitude());
-        pointToUpdate.setDate(point.getDate());
-        pointToUpdate.setPhotoLink(point.getPhotoLink());
-        pointToUpdate.setUser(point.getUser());
-
-        sessionFactory.getCurrentSession().update(pointToUpdate);
+    @Override
+    public void delete(Point point) {
+        //TODO
     }
 
-    public Point getPoint(int id) {
-        return sessionFactory.getCurrentSession().get(Point.class, id);
+    @Override
+    public Point findById(int id) {
+        //TODO
+        return null;
     }
 
-    public void deletePoint(int id) {
-        Point point = getPoint(id);
-        if(point!=null){
-            sessionFactory.getCurrentSession().delete(point);
-        }
+    @Override
+    public List<Point> findByUserID(int userID) {
+        //TODO
+        return null;
     }
 
-    @SuppressWarnings("unchecked")
-    public List<Point> getPoints() {
-        return sessionFactory.getCurrentSession().createQuery("").list();
+    @Override
+    public List<Point> findAll(int userID) {
+        //TODO
+        return null;
     }
 }

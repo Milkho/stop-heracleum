@@ -1,4 +1,4 @@
-package stopheracleum.dao;
+package stopheracleum.dao.hibernateimpl;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
