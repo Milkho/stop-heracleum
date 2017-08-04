@@ -34,7 +34,6 @@ public class CustomUserDetailsService implements UserDetailsService {
                 true, true, true, true, getGrantedAuthorities(user));
     }
 
-
     private List<GrantedAuthority> getGrantedAuthorities(User user) {
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 
