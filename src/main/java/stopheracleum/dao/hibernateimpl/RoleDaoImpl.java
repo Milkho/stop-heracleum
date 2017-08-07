@@ -1,9 +1,10 @@
-package stopheracleum.dao;
+package stopheracleum.dao.hibernateimpl;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
+import stopheracleum.dao.RoleDao;
 import stopheracleum.model.Role;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
  * Created by michael on 02.08.17.
  */
 @Repository("roleDao")
-public class RoleDaoImpl extends AbstractDao<Integer, Role>implements RoleDao{
+public class RoleDaoImpl extends AbstractDao<Integer, Role>implements RoleDao {
 
     public Role findById(int id) {
         return getByKey(id);
