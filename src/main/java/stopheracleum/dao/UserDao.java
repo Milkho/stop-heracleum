@@ -1,20 +1,12 @@
 package stopheracleum.dao;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import stopheracleum.model.User;
 
 import java.util.List;
 
-/**
- * Created by michael on 02.08.17.
- */
-public interface UserDao {
-    User findById(int id);
 
-    User findBySSO(String sso);
+public interface UserDao extends JpaRepository<User, Long> {
+    User findByUsername(String username);
 
-    void save(User user);
-
-    void deleteBySSO(String sso);
-
-    List<User> findAllUsers();
 }

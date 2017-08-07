@@ -1,22 +1,11 @@
 package stopheracleum.dao;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import stopheracleum.model.Point;
 
 
 import java.util.List;
 
-/**
- * Created by michael on 02.08.17.
- */
-public interface PointDao {
+public interface PointDao extends JpaRepository<Point, Long> {
 
-    void save(Point point);
-
-    void delete(Point point);
-
-    Point findById(int id);
-
-    List<Point> findByUserID(int userID);
-
-    List<Point> findAll(int userID);
 }
