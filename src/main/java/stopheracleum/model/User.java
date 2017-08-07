@@ -4,92 +4,43 @@ import java.io.Serializable;
 import java.util.*;
 
 import javax.persistence.*;
+
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.support.MutableSortDefinition;
 import org.springframework.beans.support.PropertyComparator;
 
-
 /**
- * Created by michael on 01.08.17.
+ * Simple JavaBean domain object that represents a User.
  */
+
 @Entity
 @Table(name = "user")
-public class User implements Serializable {
+public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    @Column(name = "sso_id", nullable=false)
-    @NotEmpty
-    private String ssoID;
-
-    @Column(name = "first_name", nullable=false)
-    @NotEmpty
-    private String firstName;
-
-    @Column(name = "last_name", nullable=false)
-    @NotEmpty
-    private String lastName;
-
-    @Column(name = "email", nullable=false)
-    @NotEmpty
-    private String email;
-
-    @Column(name = "username", unique=true, nullable=false)
-    @NotEmpty
+    @Column(name = "username")
     private String username;
 
-    @Column(name = "password", nullable=false)
-    @NotEmpty
+    @Column(name = "password")
     private String password;
 
-    @ManyToOne
-    @JoinColumn (name = "role_id")
-    private Role role;
+    @Transient
+    private String confirmPassword;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
-    private Set<Point> points;
+    @ManyToMany
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getSsoID() {
-        return ssoID;
-    }
-
-    public void setSsoID(String ssoID) {
-        this.ssoID = ssoID;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getUsername() {
@@ -108,60 +59,19 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    private Set<Point> getPointsInternal() {
-        if (this.points == null) {
-            this.points = new HashSet<Point>();
-        }
-        return this.points;
+    public String getConfirmPassword() {
+        return confirmPassword;
     }
 
-    public List<Point> getPoints() {
-        List<Point> sortedPoints = new ArrayList<Point>(getPointsInternal());
-        PropertyComparator.sort(sortedPoints, new MutableSortDefinition("id", false, false));
-        return Collections.unmodifiableList(sortedPoints);
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
-    public void addPoint(Point point) {
-        getPointsInternal().add(point);
-        point.setUser(this);
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User)) return false;
-
-        User user = (User) o;
-
-        if (!id.equals(user.id)) return false;
-        if (!firstName.equals(user.firstName)) return false;
-        if (!lastName.equals(user.lastName)) return false;
-        if (!email.equals(user.email)) return false;
-        if (!username.equals(user.username)) return false;
-        if (!password.equals(user.password)) return false;
-        return points != null ? points.equals(user.points) : user.points == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + firstName.hashCode();
-        result = 31 * result + lastName.hashCode();
-        result = 31 * result + email.hashCode();
-        result = 31 * result + username.hashCode();
-        result = 31 * result + password.hashCode();
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

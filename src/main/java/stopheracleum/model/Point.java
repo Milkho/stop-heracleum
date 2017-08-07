@@ -3,51 +3,35 @@ package stopheracleum.model;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
+
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
- * Created by michael on 01.08.17.
+ * Simple JavaBean object that represents a point added by {@link User}.
  */
 @Entity
 @Table(name = "point")
 public class Point implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column (name = "latitude")
-    @NotEmpty
+    @Column(name = "latitude", nullable = false)
     private Double latitude;
 
-    @Column (name = "longitude")
-    @NotEmpty
+    @Column(name = "longitude", nullable = false)
     private Double longitude;
 
-    @Column (name = "date")
-    @NotEmpty
+    @Column(name = "date", nullable = false)
     private Date date = new Date();
 
-    @Column (name = "photo_link")
-    @NotEmpty
+    @Column(name = "photo_link")
     private String photoLink;
 
     @ManyToOne
-    @JoinColumn (name = "user_id")
+    @JoinColumn(name = "user_id")
     private User user;
-
-    public Point (){
-
-    }
-
-    public Point(Integer id, User user, Double latitude, Double longitude, Date date, String photoLink) {
-        this.id = id;
-        this.user = user;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.date = date;
-        this.photoLink = photoLink;
-    }
 
     public Integer getId() {
         return id;
@@ -65,12 +49,12 @@ public class Point implements Serializable {
         this.latitude = latitude;
     }
 
-    public Double getLongtitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongtitude(Double longtitude) {
-        this.longitude = longtitude;
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
     public Date getDate() {
@@ -96,31 +80,5 @@ public class Point implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Point)) return false;
-
-        Point point = (Point) o;
-
-        if (id != point.id) return false;
-        if (user != point.user) return false;
-        if (!latitude.equals(point.latitude)) return false;
-        if (!longitude.equals(point.longitude)) return false;
-        if (!date.equals(point.date)) return false;
-        return photoLink != null ? photoLink.equals(point.photoLink) : point.photoLink == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + latitude.hashCode();
-        result = 31 * result + longitude.hashCode();
-        result = 31 * result + date.hashCode();
-        result = 31 * result + (photoLink != null ? photoLink.hashCode() : 0);
-        return result;
-    }
-
 
 }

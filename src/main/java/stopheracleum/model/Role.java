@@ -1,26 +1,34 @@
 package stopheracleum.model;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 /**
- * Created by michael on 02.08.17.
+ * Simple JavaBean object that represents a role of {@link User}.
  */
+
+@Entity
+@Table(name = "role")
 public class Role {
+
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    @Column(name="name", unique=true, nullable=false)
-    private String name = RoleName.USER.getRoleName();
+    @Column(name = "name")
+    private String name;
 
-    public Integer getId() {
+    @ManyToMany(mappedBy = "roles")
+    private Set<User> users;
+
+    public Role() {
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -32,5 +40,20 @@ public class Role {
         this.name = name;
     }
 
+    public Set<User> getUsers() {
+        return users;
+    }
 
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", users=" + users +
+                '}';
+    }
 }
