@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 /**
  * Simple JavaBean object that represents a point added by {@link User}.
  */
+
 @Entity
 @Table(name = "point")
 public class Point implements Serializable {
@@ -80,5 +81,4 @@ public class Point implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
-
 }
