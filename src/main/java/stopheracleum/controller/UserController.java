@@ -1,6 +1,9 @@
 package stopheracleum.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,6 +33,12 @@ public class UserController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (!(auth instanceof AnonymousAuthenticationToken)) {
+            return "redirect:/";
+        }
+
         model.addAttribute("userForm", new User());
 
         return "registration";
@@ -47,11 +56,17 @@ public class UserController {
 
         securityService.autoLogin(userForm.getUsername(), userForm.getConfirmPassword());
 
-        return "redirect:/welcome";
+        return "redirect:/map";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model, String error, String logout) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (!(auth instanceof AnonymousAuthenticationToken)) {
+            return "redirect:/";
+        }
+
         if (error != null) {
             model.addAttribute("error", "Username or password is incorrect.");
         }
