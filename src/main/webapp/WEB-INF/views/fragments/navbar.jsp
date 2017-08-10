@@ -1,3 +1,4 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
@@ -28,25 +29,30 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <c:choose>
-                    <c:when test="${not empty pageContext.request.userPrincipal}">
-                        <li>
-                            <a href="${contextPath}/profile">Profile</a>
-                        </li>
-                        <li>
-                            <a href="${contextPath}/login?logout">Log out</a>
-                        </li>
-                    </c:when>
-                    <c:otherwise>
-                        <li>
-                            <a href="${contextPath}/login">Log in</a>
-                        </li>
-                        <li>
-                            <a href="${contextPath}/registration">Sign up</a>
-                        </li>
-                    </c:otherwise>
-                </c:choose>
+                <sec:authorize access="isAuthenticated()">
+                    <li>
+                        <a href="${contextPath}/profile">Profile</a>
+                    </li>
+
+                    <li>
+                        <a onclick="document.forms['logoutForm'].submit()">Log out</a>
+                    </li>
+                </sec:authorize>
+                <form id="logoutForm" method="POST" action="${contextPath}/logout">
+                </form>
+                <sec:authorize access="isAnonymous()">
+                    <li>
+                        <a href="${contextPath}/login">Log in</a>
+                    </li>
+                    <li>
+                        <a href="${contextPath}/registration">Sign up</a>
+                    </li>
+                </sec:authorize>
+
             </ul>
+            <form id="logoutForm" method="POST" action="${contextPath}/logout">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            </form>
         </div>
         <!-- /.navbar-collapse -->
     </div>
