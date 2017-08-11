@@ -16,7 +16,6 @@ import java.util.Properties;
 /**
  * Class that configure working with data
  */
-
 @Configuration
 @EnableJpaRepositories(basePackages = "stopheracleum.dao")
 @EnableTransactionManagement
