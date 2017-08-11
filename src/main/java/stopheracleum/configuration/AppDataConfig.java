@@ -14,9 +14,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import java.util.Properties;
 
 /**
- * Class that configure working with database
+ * Class that configure working with data
  */
-
 
 @Configuration
 @EnableJpaRepositories(basePackages = "stopheracleum.dao")
