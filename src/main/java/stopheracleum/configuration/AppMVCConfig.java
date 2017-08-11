@@ -9,6 +9,10 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+/**
+ * Class that configure working with resources
+ */
+
 @Configuration
 @EnableWebMvc
 public class AppMVCConfig extends WebMvcConfigurerAdapter {
