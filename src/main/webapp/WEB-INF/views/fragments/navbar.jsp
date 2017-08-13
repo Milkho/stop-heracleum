@@ -28,6 +28,7 @@
                 <li>
                     <a href="${contextPath}contact.html">Contact</a>
                 </li>
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <sec:authorize access="isAuthenticated()">
