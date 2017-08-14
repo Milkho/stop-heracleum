@@ -58,7 +58,6 @@
                     </div>
                 </spring:bind>
 
-
                 <div class="form-group">
                     <div class="text-center">
                         <button type="submit" class="btn btn-default btn-block ">Submit</button>
