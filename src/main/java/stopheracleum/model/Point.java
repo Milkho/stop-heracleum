@@ -1,10 +1,8 @@
 package stopheracleum.model;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.*;
-
-import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * Simple JavaBean object that represents a point added by {@link User}.
@@ -25,9 +23,12 @@ public class Point implements Serializable {
     private Double longitude;
 
     @Column(name = "date", nullable = false)
-    private Date date = new Date();
+    private Date datetime = new Date();
 
-    @Column(name = "photo_link")
+    @Column(name="description")
+    private String description;
+
+    @Column (name ="photo_link")
     private String photoLink;
 
     @ManyToOne
@@ -58,12 +59,28 @@ public class Point implements Serializable {
         this.longitude = longitude;
     }
 
-    public Date getDate() {
-        return date;
+    public User getUser() {
+        return user;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Date getDatetime() {
+        return datetime;
+    }
+
+    public void setDatetime(Date datetime) {
+        this.datetime = datetime;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getPhotoLink() {
@@ -72,13 +89,5 @@ public class Point implements Serializable {
 
     public void setPhotoLink(String photoLink) {
         this.photoLink = photoLink;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 }
