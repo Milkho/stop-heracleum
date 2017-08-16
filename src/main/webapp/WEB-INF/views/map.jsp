@@ -1,7 +1,9 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
@@ -20,13 +22,16 @@
     <!-- Bootstrap Core CSS -->
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
+
     <link href="${contextPath}/resources/css/custom.css" rel="stylesheet">
+
 
 </head>
 
 <%@include file="fragments/navbar.jsp" %>
 
 <div id="map"></div>
+
 
 <sec:authorize access="isAuthenticated()">
 <div class="sidebar">
@@ -36,12 +41,15 @@
                 <spring:bind path="latitude">
                     <label for="lat" class="my-label">Latitude*</label>
                     <div class="form-group ${status.error ? 'has-error' : ''}">
+
                         <form:input type="text" id="lat" path="latitude" class="form-control"/>
                         <form:errors path="latitude"/>
                     </div>
                 </spring:bind>
                 <spring:bind path="longitude">
+
                     <label for="lng" class="my-label">Longitude*</label>
+
                     <div class="form-group ${status.error ? 'has-error' : ''}">
                         <form:input type="text" id="lng" path="longitude" class="form-control"/>
                         <form:errors path="longitude"/>
@@ -49,7 +57,9 @@
                 </spring:bind>
 
                 <spring:bind path="photoLink">
+
                     <label for="photo-link" class="my-label">Photo link</label>
+
                     <div class="form-group ${status.error ? 'has-error' : ''}">
                         <form:input type="text" id="photo-link" path="photoLink" class="form-control"/>
                         <form:errors path="photoLink"/>
@@ -73,7 +83,9 @@
         </div>
     </div>
 </div>
+
 </sec:authorize>
+
 <script>
     var map;
     function initMap() {
