@@ -18,7 +18,6 @@ import stopheracleum.validator.SignUpValidator;
 /**
  * Controller for {@link stopheracleum.model.User}'s pages.
  */
-
 @Controller
 public class UserController {
 

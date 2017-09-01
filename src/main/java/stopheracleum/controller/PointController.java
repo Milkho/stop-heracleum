@@ -38,7 +38,6 @@ public class PointController {
 
     private List<Point> points;
 
-
     @RequestMapping(value = "/map", method = RequestMethod.GET)
     public String map(Model model) {
 
