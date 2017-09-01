@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import stopheracleum.model.User;
 import stopheracleum.security.SecurityService;
 import stopheracleum.service.UserService;
-import stopheracleum.validator.UserValidator;
+import stopheracleum.validator.SignUpValidator;
 
 /**
  * Controller for {@link stopheracleum.model.User}'s pages.
@@ -29,7 +29,7 @@ public class UserController {
     private SecurityService securityService;
 
     @Autowired
-    private UserValidator userValidator;
+    private SignUpValidator signUpValidator;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
@@ -46,7 +46,7 @@ public class UserController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
-        userValidator.validate(userForm, bindingResult);
+        signUpValidator.validate(userForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return "registration";
@@ -68,7 +68,7 @@ public class UserController {
         }
 
         if (error != null) {
-            model.addAttribute("error", "Username or password is incorrect.");
+            model.addAttribute("error", "LoginFail");
         }
 
         if (logout != null) {
@@ -76,11 +76,6 @@ public class UserController {
         }
 
         return "login";
-    }
-
-    @RequestMapping(value = {"/welcome"}, method = RequestMethod.GET)
-    public String welcome(Model model) {
-        return "welcome";
     }
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
