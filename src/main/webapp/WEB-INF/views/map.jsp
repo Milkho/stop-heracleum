@@ -22,11 +22,11 @@
     <!-- Bootstrap Core CSS -->
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
-
     <link href="${contextPath}/resources/css/custom.css" rel="stylesheet">
 
-
 </head>
+<body>
+
 
 <%@include file="fragments/navbar.jsp" %>
 
@@ -34,75 +34,60 @@
 
 
 <sec:authorize access="isAuthenticated()">
-<div class="sidebar">
-    <div class="row">
-        <div class="col-lg-12">
-            <form:form method="POST" modelAttribute="pointForm" class="my-form">
-                <spring:bind path="latitude">
-                    <label for="lat" class="my-label">Latitude*</label>
-                    <div class="form-group ${status.error ? 'has-error' : ''}">
-
-                        <form:input type="text" id="lat" path="latitude" class="form-control"/>
-                        <form:errors path="latitude"/>
-                    </div>
-                </spring:bind>
-                <spring:bind path="longitude">
-
-                    <label for="lng" class="my-label">Longitude*</label>
-
-                    <div class="form-group ${status.error ? 'has-error' : ''}">
-                        <form:input type="text" id="lng" path="longitude" class="form-control"/>
-                        <form:errors path="longitude"/>
-                    </div>
-                </spring:bind>
-
-                <spring:bind path="photoLink">
-
-                    <label for="photo-link" class="my-label">Photo link</label>
-
-                    <div class="form-group ${status.error ? 'has-error' : ''}">
-                        <form:input type="text" id="photo-link" path="photoLink" class="form-control"/>
-                        <form:errors path="photoLink"/>
-                    </div>
-                </spring:bind>
-
-                <spring:bind path="description">
-                    <label for="description" class="my-label">Description</label>
-                    <div class="form-group ${status.error ? 'has-error' : ''}">
-                        <form:textarea rows="6" type="text" id="description" path="description" class="form-control vertical-resize"/>
-                        <form:errors path="description"/>
-                    </div>
-                </spring:bind>
-
-                <div class="form-group">
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-default btn-block ">Submit</button>
-                    </div>
-                </div>
-            </form:form>
-        </div>
-    </div>
-</div>
-
+    <%@include file="fragments/sidebar.jsp" %>
 </sec:authorize>
 
 <script>
     var map;
+
+    var markerLat = [
+        <c:forEach var="m" items="${points}">
+        <c:out value="${m.latitude}"/>,
+        </c:forEach>
+    ];
+    var markerLong = [
+        <c:forEach var="m" items="${points}">
+        <c:out value="${m.longitude}"/>,
+        </c:forEach>
+    ];
+
+
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 56.981316, lng: 32.449277},
             zoom: 6
         });
 
-        google.maps.event.addListener(map, 'click', function (event) {
-            addLatLng(event.latLng, map);
-        });
 
-        function addLatLng(location, map) {
-            document.getElementById("lat").value = +location.lat();
-            document.getElementById("lng").value = +location.lng();
+        var infoWindow = new google.maps.InfoWindow();
+        var marker;
+        var iconBase = 'http://maps.gstatic.com/mapfiles/ridefinder-images/';
+
+        for (var i = 0; i < markerLat.length; i++) {
+            marker = new google.maps.Marker({
+                position: new google.maps.LatLng(markerLat[i], markerLong[i]),
+                map: map,
+                icon: iconBase + 'mm_20_green.png'
+            });
+
+            google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                return function() {
+                    infoWindow.setContent("Coolman);
+                    infoWindow.open(map, marker);
+                }
+            })(marker, i));
         }
 
+        <sec:authorize access="isAuthenticated()">
+            google.maps.event.addListener(map, 'click', function (event) {
+                addLatLng(event.latLng, map);
+            });
+
+            function addLatLng(location, map) {
+                document.getElementById("lat").value = +location.lat();
+                document.getElementById("lng").value = +location.lng();
+            }
+        </sec:authorize>
     }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAr8YuEDjaiyVXYhUsPfe8yWmL_1RfP0C8&callback=initMap"
