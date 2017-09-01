@@ -23,7 +23,6 @@ import java.util.List;
 /**
  * Controller for {@link stopheracleum.model.Point}'s pages.
  */
-
 @Controller
 public class PointController {
 

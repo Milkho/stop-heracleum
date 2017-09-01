@@ -81,4 +81,5 @@ public class UserController {
     public String admin(Model model) {
         return "admin";
     }
+
 }

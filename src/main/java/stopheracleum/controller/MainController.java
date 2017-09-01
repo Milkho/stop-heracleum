@@ -16,7 +16,6 @@ public class MainController {
         return "index";
     }
 
-
     @RequestMapping(value = "/contact", method = RequestMethod.GET)
     public String contact(Locale locale, Model model) {
         return "contact";
