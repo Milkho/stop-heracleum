@@ -1,8 +1,9 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+
 
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
@@ -51,7 +52,6 @@
 
 
     function initMap() {
-
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 56.981316, lng: 32.449277},
             zoom: 6
