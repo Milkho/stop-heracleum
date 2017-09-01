@@ -23,17 +23,6 @@ public class PointValidator implements Validator {
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "latitude", "Required");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "longitude", "Required");
-        //ValidationUtils.rejectIfEmptyOrWhitespace(errors, "description", "Required");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "photolink", "Required");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "Required");
-
-        if (point.getLatitude() < 0) {
-            errors.rejectValue("latitude", "Negative.pointForm.latitude");
-        }
-
-        if (point.getLongitude() < 0) {
-            errors.rejectValue("longitude", "Negative.pointForm.longitude");
-        }
 
 
     }

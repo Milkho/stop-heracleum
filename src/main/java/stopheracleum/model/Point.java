@@ -10,11 +10,11 @@ import java.util.Date;
 
 @Entity
 @Table(name = "point")
-public class Point implements Serializable {
+public class Point implements  Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     @Column(name = "latitude", nullable = false)
     private Double latitude;
@@ -35,11 +35,11 @@ public class Point implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

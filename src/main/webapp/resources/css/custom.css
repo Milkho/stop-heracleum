@@ -1,29 +1,132 @@
+/*!
+ * Start Bootstrap - Modern Business (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+
+/* Global Styles */
+
+html,
 body {
-    padding-top: 40px;
-    padding-bottom: 40px;
+    height: 100%;
     background-color: #eee;
+    margin:0;
+    padding:0;
+
+}
+
+body {
+    padding-top: 50px;
+}
+
+.img-portfolio {
+    margin-bottom: 30px;
+}
+
+.img-hover:hover {
+    opacity: 0.8;
+}
+
+#map{
+    height: 100%;
+}
+/* Home Page Carousel */
+
+header.carousel {
+    height: 50%;
+}
+
+header.carousel .item,
+header.carousel .item.active,
+header.carousel .carousel-inner {
+    height: 100%;
+}
+
+header.carousel .fill {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    border-bottom-style: groove;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+/* 404 Page Styles */
+
+.error-404 {
+    font-size: 100px;
+}
+
+
+.period {
+    display: block;
+    font-style: italic;
+}
+
+.black-navbar{
+    background-color: #080808;
+    border-color: #333;
+}
+/* Footer Styles */
+
+footer {
+    margin: 50px 0;
+}
+
+/* Responsive Styles */
+
+@media(max-width:991px) {
+    .customer-img,
+    .img-related {
+        margin-bottom: 30px;
+    }
+}
+
+@media(max-width:767px) {
+    .img-portfolio {
+        margin-bottom: 15px;
+    }
+
+    header.carousel .carousel {
+        height: 70%;
+    }
 }
 
 form > fieldset > legend {
     font-size:120%;
 }
 
-.form-signin {
+.icon-small
+{
+    height:18px;
+    margin:0;
+    padding:0;
+}
+
+.icon-medium
+{
+    height:22px;
+    margin:0;
+    padding:0;
+}
+
+.my-form {
     max-width: 330px;
     padding: 15px;
     margin: 0 auto;
 }
 
-.form-signin .form-signin-heading,
-.form-signin .checkbox {
+.my-form .my-form-heading,
+.my-form .checkbox {
     margin-bottom: 10px;
 }
 
-.form-signin .checkbox {
+.my-form .checkbox {
     font-weight: normal;
 }
 
-.form-signin .form-control {
+.my-form .form-control {
     position: relative;
     height: auto;
     -webkit-box-sizing: border-box;
@@ -33,22 +136,103 @@ form > fieldset > legend {
     font-size: 16px;
 }
 
-.form-signin .form-control:focus {
+.my-form .form-control:focus {
     z-index: 2;
 }
 
-
-
-.form-signin input {
+.my-form input {
     margin-top: 10px;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
 }
 
-.form-signin button {
+.my-form button {
     margin-top: 10px;
 }
 
 .has-error {
     color: red
+}
+
+.my-label{
+    color: #9D9D9D;
+}
+.my-sidebar-wrapper,
+.my-sidebar{
+    position: fixed;
+    overflow: auto;
+    top: 50px;
+    height: 100%;
+}
+
+.my-sidebar{
+
+
+    font-size: 12px;
+    font-weight: 200;
+    background-color: #080808;
+    width: 300px;
+}
+
+.my-vertical-button{
+    position: fixed;
+    margin-top: 300px;
+    margin-left: -50px;
+    -ms-transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    transform: rotate(270deg);
+}
+.vertical-resize{
+    resize: vertical;
+}
+
+.my-image-preview{
+    height:50px;
+    margin-top:10px;
+    overflow: hidden;
+}
+
+.push{
+    height: 40px;
+}
+.footer-bottom {
+    border-color: #333;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    min-height: 30px;
+    background-color: #080808;
+
+}
+.copyright {
+    color: #9d9d9d;
+    line-height: 30px;
+    min-height: 30px;
+    padding: 7px 0;
+}
+.design {
+    color: #9d9d9d;
+    line-height: 30px;
+    min-height: 30px;
+    padding: 7px 0;
+    text-align: right;
+}
+.design a {
+    color: #fff;
+}
+
+.my-image-bordered {
+    padding: 1px;
+    border: 1px solid #000000;
+    background-color: #9d9d9d;
+    border-radius: 4px;
+}
+
+#slide-submenu{
+    background: rgba(0, 0, 0, 0);
+    display: inline-block;
+    padding: 0 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #9D9D9D;
 }

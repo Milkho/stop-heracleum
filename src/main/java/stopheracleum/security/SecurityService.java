@@ -1,7 +1,7 @@
 package stopheracleum.security;
 
 /**
- * Service for security
+ * Service for Security.
  */
 
 public interface SecurityService {

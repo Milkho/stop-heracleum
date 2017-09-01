@@ -1,10 +1,11 @@
 package stopheracleum.model;
 
+
 import javax.persistence.*;
 import java.util.Set;
 
 /**
- * Simple JavaBean object that represents a role of {@link User}.
+ * Simple JavaBean object that represents role of {@link User}.
  */
 
 @Entity
@@ -22,7 +23,6 @@ public class Role {
     private Set<User> users;
 
     public Role() {
-        
     }
 
     public Long getId() {
