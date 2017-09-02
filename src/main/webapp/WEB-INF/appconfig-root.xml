@@ -6,9 +6,9 @@
 
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <import resource="appconfig-mvc.xml"/>
+    <bean class="stopheracleum.configuration.AppDataConfig" />
 
-    <import resource="appconfig-data.xml"/>
+    <bean class="stopheracleum.configuration.AppMVCConfig"/>
 
     <import resource="appconfig-security.xml"/>
 
