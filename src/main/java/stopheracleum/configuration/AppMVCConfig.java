@@ -27,7 +27,7 @@ public class AppMVCConfig extends WebMvcConfigurerAdapter {
     public ReloadableResourceBundleMessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         messageSource.setBasenames("classpath:messages/validation", "classpath:messages/navbar", "classpath:messages/pointform",
-                "classpath:messages/userform", "classpath:messages/indexpage", "classpath:messages/errorpage", "classpath:messages/contact");
+                "classpath:messages/userform", "classpath:messages/indexpage", "classpath:messages/errorpage", "classpath:messages/contact", "classpath:messages/map");
         messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
     }
