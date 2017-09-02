@@ -8,11 +8,14 @@ import java.util.Set;
  */
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
 
+    private static final int START_SEQ = 100000;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "glob_seq", sequenceName = "glob_seq", allocationSize = 1, initialValue = START_SEQ)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "glob_seq")
     private Long id;
 
     @Column(name = "username")
@@ -34,7 +37,7 @@ public class User {
     private String email;
 
     @ManyToMany
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 

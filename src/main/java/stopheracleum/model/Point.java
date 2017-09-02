@@ -9,11 +9,14 @@ import java.util.Date;
  */
 
 @Entity
-@Table(name = "point")
+@Table(name = "points")
 public class Point implements  Serializable {
 
+    private static final int START_SEQ = 100000;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "glob_seq", sequenceName = "glob_seq", allocationSize = 1, initialValue = START_SEQ)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "glob_seq")
     private Long id;
 
     @Column(name = "latitude", nullable = false)

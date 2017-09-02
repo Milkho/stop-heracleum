@@ -9,11 +9,14 @@ import java.util.Set;
  */
 
 @Entity
-@Table(name = "role")
+@Table(name = "roles")
 public class Role {
 
+    private static final int START_SEQ = 100000;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "glob_seq", sequenceName = "glob_seq", allocationSize = 1, initialValue = START_SEQ)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "glob_seq")
     private Long id;
 
     @Column(name = "name")
