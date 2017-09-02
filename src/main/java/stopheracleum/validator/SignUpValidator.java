@@ -23,7 +23,8 @@ public class SignUpValidator implements Validator {
     private UserService userService;
 
     // regular expression for username validation
-    private static final String USERNAME_PATTERN = "^[a-z0-9_-]$";
+    private static final String USERNAME_PATTERN = "^[a-z0-9_-]{4,32}$";
+
 
     @Override
     public boolean supports(Class<?> aClass) {
@@ -42,15 +43,13 @@ public class SignUpValidator implements Validator {
         if (user.getUsername().length() < 4 || user.getUsername().length() > 32) {
             errors.rejectValue("username", "Size.userForm.username");
         }
-
+        else if (userService.findByUsername(user.getUsername()) != null) {
+            errors.rejectValue("username", "Duplicate.userForm.username");
+        }
         //validate with regular expression
         else if (!Pattern.compile(USERNAME_PATTERN).matcher(user.getUsername()).matches()) {
             errors.rejectValue("username", "Invalid.userForm.username");
         }
-        else if (userService.findByUsername(user.getUsername()) != null) {
-            errors.rejectValue("username", "Duplicate.userForm.username");
-        }
-
         if (!user.getConfirmPassword().equals(user.getPassword())) {
             errors.rejectValue("confirmPassword", "Different.userForm.password");
         }
