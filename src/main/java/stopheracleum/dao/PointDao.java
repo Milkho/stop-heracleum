@@ -1,10 +1,8 @@
 package stopheracleum.dao;
 
-import com.sun.xml.internal.bind.v2.model.core.ID;
 import org.springframework.data.jpa.repository.JpaRepository;
 import stopheracleum.model.Point;
 
-import javax.persistence.Id;
 import java.util.List;
 
 
