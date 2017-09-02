@@ -100,15 +100,15 @@
                     return function () {
                         var content = "";
                         if (markerDesc[i] !== "") {
-                            content += "Description: " + markerDesc[i] + " <br> ";
+                            content += "<spring:message code="map.desc"/>:" + markerDesc[i] + " <br> ";
                         }
                         if (markerPhotoLink[i] !== "") {
-                            content += "Photo: <a href=\"" + markerPhotoLink[i] + "\"><img class=\"my-image-preview\" src=\"" + markerPhotoLink[i] + "\"></a><br> ";
+                            content += "<spring:message code="map.photo"/>: <a href=\"" + markerPhotoLink[i] + "\"><img class=\"my-image-preview\" src=\"" + markerPhotoLink[i] + "\"></a><br> ";
                         }
 
-                        content += "Date: " + new Date(markerTime[i]).toLocaleString() + "<br>";
+                        content += "<spring:message code="map.date"/>:" + new Date(markerTime[i]).toLocaleString() + "<br>";
                         if (markerUserId[i].toString() === "${currentUserId}") {
-                            content += '<form action = "${contextPath}/map/remove-point" method="POST"><input name="pointId" type="hidden" value="'+ markerId[i] +'"/> <input type="submit" value="Delete this point"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/></form>';
+                            content += '<form action = "${contextPath}/map/remove-point" method="POST"><input name="pointId" type="hidden" value="'+ markerId[i] +'"/> <input type="submit" value="<spring:message code="map.delete"/>><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/></form>';
                         }
                         infoWindow.setContent(content);
 
